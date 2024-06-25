@@ -15,6 +15,8 @@ type ConfigMsg_t struct {
 	AdmBannedAlready string `json:"adm_banned_already"`
 	AdmUnBanned      string `json:"adm_unbanned"`
 	UsrBanned        string `json:"usr_banned"`
+	WarnEdit         string `json:"warn_edit"`
+	WarnReply        string `json:"warn_reply"`
 }
 
 type Config_t struct {

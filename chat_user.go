@@ -73,12 +73,32 @@ func chat_user(c tele.Context, addReact *tele.ReactionOptions) error {
 			log.Error().Err(err).Msg("user_chat: addReact to admin_chat")
 		}
 	}
+
+	botNotes := make([]string, 0, 3)
 	if message.LastEdit == 0 {
 		// Если сообщение новое (LastEdit == 0)
-		// Реагируем на сообщение, отметив его reactSended
+		//  добавляем на него реакцию reactSended
 		err = Bot.React(message.Chat, message, reactSended)
 		if err != nil {
 			log.Error().Err(err).Msg("user_chat: reactSended")
+		}
+	} else {
+		// Если сообщение отредактировано (LastEdit != 0)
+		//  сообщаем, что это немного не так работает
+		botNotes = append(botNotes, СonfMsg.WarnEdit)
+	}
+
+	if message.ReplyTo != nil {
+		// Если пользователь ответил на сообщение
+		//  сообщаем, что это немного не так работает
+		botNotes = append(botNotes, СonfMsg.WarnReply)
+	}
+
+	// botNote - заметки от бота
+	if len(botNotes) > 0 {
+		err = c.Reply(strings.Join(botNotes, "\n\n"))
+		if err != nil {
+			log.Error().Err(err).Msg("user_chat: botNotes")
 		}
 	}
 	return nil

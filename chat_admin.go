@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/rs/zerolog/log"
 	tele "gopkg.in/telebot.v3"
@@ -58,5 +59,25 @@ func chat_admin(c tele.Context, addReact *tele.ReactionOptions) error {
 		}
 	}
 
+	botNotes := make([]string, 0, 3)
+	if message.LastEdit != 0 {
+		// Если сообщение отредактировано (LastEdit != 0)
+		//  сообщаем, что это немного не так работает
+		botNotes = append(botNotes, СonfMsg.WarnEdit)
+	}
+
+	if message.ThreadID != 0 && message.ThreadID != message.ReplyTo.ID {
+		// Если администратор ответил на сообщение кроме первого
+		//  сообщаем, что это немного не так работает
+		botNotes = append(botNotes, СonfMsg.WarnReply)
+	}
+
+	// botNote - заметки от бота
+	if len(botNotes) > 0 {
+		err = c.Reply(strings.Join(botNotes, "\n\n"))
+		if err != nil {
+			log.Error().Err(err).Msg("admin_chat: botNotes")
+		}
+	}
 	return nil
 }
