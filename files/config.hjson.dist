@@ -1,0 +1,22 @@
+{
+	# Основные параметры
+	bot_token: "4839574812:AAFD39kkdpWt3ywyRZergyOLMaJhac60qc"
+	admin_chat: 0 // Установите на 0, чтобы бот на все сообщения писал chat_id
+	# -----------------------
+
+	# Приветственное сообщение, при запуске бота (HTML, с LinkPreview)
+	start_message:
+		'''
+		Привет ✌️
+		Это бот для обратной связи IPTV-плеера <a href="https://t.me/ottplay_foss">OTT-play FOSS</a>.
+		(<a href="https://telegra.ph/ottplay-foss-06-22">Немного информации</a>) для тех, кто не знает, что это.
+		Он предназначен <b>только</b> для передачи важной <b>непубличной</b> информации непосредственно разработчику.
+		Вы также можете писать свои идеи и пожелания.
+
+		<blockquote>Здесь не оказывают консультаций, не заключают партнерок итд.</blockquote>
+		Если у Вас проблемы с плеером, почитайте <a href="https://ottp.eu.org/www/faq/">сайт</a> и обратитесь в @ottplay_foss_chat
+		'''
+	# WebHook, если не указан, то будет использоваться Poller
+	webhook_listen_local: ":8089" // Можно и так - 127.0.0.1:8081
+	webhook_public_url: "https://<YOURDOMAIN.EXAMPLE>/<WEBHOOKLOCATION>" // Обязательно https
+}

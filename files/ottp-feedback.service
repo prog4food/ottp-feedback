@@ -1,0 +1,14 @@
+[Unit]
+Description=ottp-feedback bot
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+RestartSec=5
+TimeoutStopSec=15
+WorkingDirectory=/home/foss-fedb
+ExecStart=/home/foss-fedb/ottp-feedback
+
+[Install]
+WantedBy=multi-user.target default.target
