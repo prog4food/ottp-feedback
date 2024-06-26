@@ -1,7 +1,10 @@
 package main
 
 import (
+	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
 	"time"
 
 	"github.com/rs/zerolog/log"
@@ -23,6 +26,35 @@ var (
 
 // Устанавливаются при сборке
 var depl_ver = "[devel]"
+
+// signal handler
+func signalHandler(signal os.Signal) {
+	log.Warn().Msgf("Caught signal: %+v", signal)
+	isTermSignal := false
+
+	switch signal {
+
+	case syscall.SIGHUP,
+		syscall.SIGINT,
+		syscall.SIGTERM,
+		syscall.SIGQUIT:
+		isTermSignal = true
+	default:
+		log.Error().Msgf("Unknown signal: %+v", signal)
+	}
+
+	if isTermSignal {
+		log.Info().Msg("Shutdown...")
+		os.Exit(0)
+	}
+}
+
+// initialize signal handler
+func initSignals() {
+	captureSignal := make(chan os.Signal, 1)
+	signal.Notify(captureSignal, syscall.SIGINT, syscall.SIGTERM, syscall.SIGABRT)
+	signalHandler(<-captureSignal)
+}
 
 func main() {
 	var err error
@@ -79,6 +111,7 @@ func main() {
 		Bot.Start()
 		return
 	}
+	go initSignals()
 
 	// Инициализация бота
 	BotId = Bot.Me.ID
