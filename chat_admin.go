@@ -66,11 +66,14 @@ func chat_admin(c tele.Context, addReact *tele.ReactionOptions) error {
 		botNotes = append(botNotes, СonfMsg.WarnEdit)
 	}
 
-	if message.ThreadID != 0 && message.ThreadID != message.ReplyTo.ID {
-		// Если администратор ответил на сообщение кроме первого
-		//  сообщаем, что это немного не так работает
-		botNotes = append(botNotes, СonfMsg.WarnReply)
-	}
+	// Пока это только мешает, администратор наверняка знает, об этих ограничениях
+	// а вот "быстро отчечать" выделив любое сообщение пользователя,
+	// а не заглавное будет удобнее без назойливого напоминания
+	// if message.ThreadID != 0 && message.ThreadID != message.ReplyTo.ID {
+	// 	// Если администратор ответил на сообщение кроме первого
+	// 	//  сообщаем, что это немного не так работает
+	// 	botNotes = append(botNotes, СonfMsg.WarnReply)
+	// }
 
 	// botNote - заметки от бота
 	if len(botNotes) > 0 {
