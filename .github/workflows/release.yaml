@@ -16,6 +16,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            release/ottp-feedback_linux-arm_dev-23c6f79.tgz
-            release/ottp-feedback_linux-arm64_dev-23c6f79.tgz
-            release/ottp-feedback_windows-amd64_dev-23c6f79.tgz
+            release/ottp-feedback_*.tgz
