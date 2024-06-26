@@ -2,6 +2,12 @@
 BUILD_NAME=ottp-feedback
 BUILD_DIR=./release
 
+[ "$GITHUB_ACTIONS" = "true" ] && {
+	# GitHub Actions is running
+	# https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+	git config --global --add safe.directory $PWD
+}
+
 [ "$1" = "clean" ] && {
 	echo "CleaningUp..."
 	[ -d $BUILD_DIR/ ] && rm -rf $BUILD_DIR
