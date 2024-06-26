@@ -35,10 +35,11 @@ tar cf $BUILD_DIR/files_${DEPL_VER}.tar -C $BUILD_DIR/../files/ --exclude='confi
 tar rf $BUILD_DIR/files_${DEPL_VER}.tar -C $BUILD_DIR/../ README.md
 
 # Build
-GOOS=windows GOARCH=amd64 build_bin
-GOOS=linux   GOARCH=amd64 build_bin
-GOOS=linux   GOARCH=arm64 build_bin
-GOOS=linux   GOARCH=arm   build_bin
+GOOS=windows GOARCH=amd64  build_bin
+GOOS=linux   GOARCH=amd64  build_bin
+GOOS=linux   GOARCH=arm64  build_bin
+GOOS=linux   GOARCH=arm    build_bin
+GOOS=linux   GOARCH=mipsle build_bin
 
 # Static pack: remove
 rm $BUILD_DIR/files_${DEPL_VER}.tar
