@@ -88,7 +88,7 @@ func InitCommandsMenu() {
 		return _ban_core(c, "игнорирования", ListIgnore)
 	})
 
-	Bot.Handle("/unban", func(c tele.Context) error {
+	Bot.Handle("/unblock", func(c tele.Context) error {
 		// Команду принимаем только в админском чате
 		if c.Chat().ID != Сonf.AdminChat {
 			return nil
