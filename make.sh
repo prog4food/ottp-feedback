@@ -2,7 +2,7 @@
 BUILD_NAME=ottp-feedback
 BUILD_DIR=./release
 
-[ "$1" == "clean" ] && {
+[ "$1" = "clean" ] && {
 	echo "CleaningUp..."
 	[ -d $BUILD_DIR/ ] && rm -rf $BUILD_DIR
 	exit
@@ -10,7 +10,7 @@ BUILD_DIR=./release
 
 build_bin() {
 	echo "== Building: $GOOS-$GOARCH"
-	[ "$GOOS" == "windows" ] && GOEXT=.exe || unset GOEXT
+	[ "$GOOS" = "windows" ] && GOEXT=.exe || unset GOEXT
 	FN=${BUILD_NAME}_${GOOS}-${GOARCH}
 	go build -ldflags "-s -w -X main.depl_ver=$DEPL_VER" -o $BUILD_DIR/${FN}${GOEXT} $* && {
 		echo "   OK"
