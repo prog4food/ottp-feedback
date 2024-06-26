@@ -37,6 +37,13 @@ var (
 	СonfMsg *ConfigMsg_t
 )
 
+func read_config_env(env_var string, target_var *string) {
+	enVar := os.Getenv(env_var)
+	if enVar != "" {
+		*target_var = enVar
+	}
+}
+
 func read_config() {
 	Сonf = &Config_t{}
 	jsonData, err := os.ReadFile(fileConfig)
@@ -48,17 +55,13 @@ func read_config() {
 	}
 
 	// Грузим BotToken из переменной окружения, если она есть
-	enVar := os.Getenv("BOT_TOKEN")
-	if enVar != "" {
-		Сonf.BotToken = enVar
-	}
-
+	read_config_env("BotToken", &Сonf.BotToken)
 	if Сonf.BotToken == "" {
 		log.Fatal().Msg("BotToken - is not set!")
 	}
 
 	// Грузим AdminChat из переменной окружения, если она есть
-	enVar = os.Getenv("ADMIN_CHAT")
+	enVar := os.Getenv("ADMIN_CHAT")
 	if enVar != "" {
 		Сonf.AdminChat, err = strconv.ParseInt(enVar, 10, 64)
 		if err != nil {
@@ -67,10 +70,13 @@ func read_config() {
 	}
 
 	// Грузим StartMsg из переменной окружения, если она есть
-	enVar = os.Getenv("START_MESSAGE")
-	if enVar != "" {
-		Сonf.StartMsg = enVar
-	}
+	read_config_env("START_MESSAGE", &Сonf.StartMsg)
+
+	// Грузим WebhookListen из переменной окружения, если она есть
+	read_config_env("WEBHOOK_LISTEN_LOCAL", &Сonf.WebhookListen)
+
+	// Грузим WebhookUrl из переменной окружения, если она есть
+	read_config_env("WEBHOOK_PUBLIC_URL", &Сonf.WebhookUrl)
 
 	СonfMsg = &ConfigMsg_t{}
 	jsonData, err = os.ReadFile(fileConfigMsg)
