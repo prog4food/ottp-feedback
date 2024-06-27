@@ -7,8 +7,8 @@ After=network-online.target
 Restart=always
 RestartSec=5
 TimeoutStopSec=15
-WorkingDirectory=/home/foss-fedb
-ExecStart=/home/foss-fedb/ottp-feedback
+WorkingDirectory=/home/ottp-feedback
+ExecStart=/home/ottp-feedback/ottp-feedback
 
 [Install]
 WantedBy=multi-user.target default.target
