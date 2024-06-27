@@ -68,8 +68,8 @@ TODO: Вероятно, я сделаю сохранение и загрузку
  * Определять ид чата, для настройки  
    если в настройках поставить `admin_chat = 0`, то на каждое сообщение бот будет писать ид текущего чата, полезно для настройки.
  * Работать без конфига  
-   поддерживается установка переменных окружения  
-   BOT_TOKEN, ADMIN_CHAT, START_MESSAGE, WEBHOOK_LISTEN_LOCAL, WEBHOOK_PUBLIC_URL
+   поддерживается установка переменных окружения
+   `BOT_TOKEN`, `ADMIN_CHAT`, `START_MESSAGE`, `WEBHOOK_LISTEN_LOCAL`, `WEBHOOK_PUBLIC_URL`
  * Банить пользователей  
    Заблокированному будет приходить сообщение-отбивка.  
    Чтобы забанить напишите в ответе на сообщение пользователя `/ban`
@@ -129,8 +129,8 @@ server {
 ```
 и в настройках бота:
 ```hjson
-	webhook_listen_local: ":8084"
-	webhook_public_url: "https://example.com/tgooks/secret12345"
+   webhook_listen_local: ":8084"
+   webhook_public_url: "https://example.com/tgooks/secret12345"
 ```
 
 
