@@ -30,8 +30,8 @@ func _ban_core(c tele.Context, ban_name string, ban_list map[int64]struct{}) err
 		if err != nil {
 			log.Error().Err(err).Msg("Cannot send admin MsgBanned")
 		}
-		if ban_name == "блокировки" {
-			// Оповещаем пользователя
+		if ban_name == "ban" {
+			// Оповещаем пользователя, если это был бан-лист
 			_, err = Bot.Send(&DummyChat{ID: strconv.FormatInt(chat_id, 10)}, СonfMsg.UsrBanned, tele.ModeHTML)
 			if err != nil {
 				log.Error().Err(err).Msg("Cannot send user MsgBanned")
@@ -61,7 +61,7 @@ func InitCommandsMenu() {
 		[]tele.Command{
 			{Text: "ban", Description: "Заблокировать пользователя (с сообщением)"},
 			{Text: "ignore", Description: "Игнорировать пользователя (без сообщений)"},
-			{Text: "unblock", Description: "Снять все блокировки с пользователя"},
+			{Text: "unblock", Description: "Снять все ограничения с пользователя"},
 			// {Text: "restrict_list", Description: "Показать список заблокированных и игнорируемых"},
 		},
 	)
@@ -81,11 +81,11 @@ func InitCommandsMenu() {
 	})
 
 	Bot.Handle("/ban", func(c tele.Context) error {
-		return _ban_core(c, "блокировки", ListBan)
+		return _ban_core(c, "ban", ListBan)
 	})
 
 	Bot.Handle("/ignore", func(c tele.Context) error {
-		return _ban_core(c, "игнорирования", ListIgnore)
+		return _ban_core(c, "ignore", ListIgnore)
 	})
 
 	Bot.Handle("/unblock", func(c tele.Context) error {
