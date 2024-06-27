@@ -84,7 +84,7 @@ func read_config() {
 		err = hjson.Unmarshal(jsonData, СonfMsg)
 	}
 	if err != nil {
-		log.Err(err).Msg(fileConfig + ": cannot read config!!!")
+		log.Fatal().Err(err).Msg(fileConfigMsg + ": cannot config!!!")
 	}
 	// (с) //
 	СonfMsg.Help += "\n\n" + `<a href="https://github.com/prog4food">prog4food</a>`
